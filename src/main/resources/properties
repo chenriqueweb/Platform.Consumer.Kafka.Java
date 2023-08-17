@@ -1,3 +1,0 @@
-kafka.producer.server=127.0.0.1:9092
-kafka.producer.topic=compras.do.cliente
-kafka.producer.client=cliente-1
