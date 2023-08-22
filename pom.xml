@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>Platform.Consumer.Kafka.Java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <dependencies>
         <dependency>
