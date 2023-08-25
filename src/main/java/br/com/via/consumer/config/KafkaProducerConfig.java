@@ -16,20 +16,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static br.com.via.consumer.config.KafkaConfig.getProperties;
+import static br.com.via.consumer.config.KafkaConfig.getPropertiesYaml;
 
 public class KafkaProducerConfig
 {
-    //@Value(value = "${spring.kafka.bootstrap-servers:localhost:9092}")
-    //private String bootstrapAddress;
-
     KafkaConfig kafkaConfig;
 
+    public static String tipFileConfig;
+    public static String server;
+    public static String groupId;
+
+    public KafkaProducerConfig(String tipFileConfig) throws IOException {
+        this.tipFileConfig = tipFileConfig;
+
+        if(tipFileConfig == "properties") {
+            server = getProperties().getProperty("kafka.producer.server");
+            groupId = getProperties().getProperty("kafka.producer.grouped");
+        } else {
+            server = getPropertiesYaml().getProperty("kafka.producer.server");
+            groupId = getPropertiesYaml().getProperty("kafka.producer.grouped");
+        }
+    }
+
     @Bean
-    public ProducerFactory<String, String> producerFactory() throws IOException {
+    public ProducerFactory<String, Object> producerFactory() throws IOException {
         Map<String, Object> configProps = new HashMap<>();
 
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, getProperties().getProperty("kafka.producer.server"));
-        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, getProperties().getProperty("kafka.producer.client"));
+        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, server);
+        configProps.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         configProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class);
         configProps.put("schema.registry.url", "http://localhost:8081");
         configProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class);
@@ -38,7 +52,7 @@ public class KafkaProducerConfig
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() throws IOException {
+    public KafkaTemplate<String, Object> kafkaTemplate() throws IOException {
         return new KafkaTemplate<>(producerFactory());
     }
 

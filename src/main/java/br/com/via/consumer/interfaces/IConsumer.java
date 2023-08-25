@@ -8,7 +8,7 @@ import org.springframework.retry.annotation.Backoff;
 public interface IConsumer {
 
     @KafkaListener( topics = "#{'${spring.kafka.topics}'.split(',')}",
-                   groupId = "#{'${spring.kafka.topics}'.split(',')}")
+                   groupId = "#{'${spring.kafka.kafka.producer.grouped}'.split(',')}")
     @RetryableTopic(
             backoff = @Backoff(value = 3000L),
             attempts = "5",
