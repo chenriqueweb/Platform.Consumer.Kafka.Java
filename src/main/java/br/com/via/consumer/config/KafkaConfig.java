@@ -29,9 +29,9 @@ public class KafkaConfig {
     private static String consumerBootstrapServers;
     @Value("${spring.kafka.consumer.group-id}")           // GROUP_ID_CONFIG
     private static String consumerGroupId;
-    @Value("${spring.kafka.consumer.pool-records}")       // MAX_POLL_RECORDS_CONFIG
+    @Value("${spring.kafka.consumer.pool-records:Default}")       // MAX_POLL_RECORDS_CONFIG
     private static String consumerPoolRecords;
-    @Value("${spring.kafka.consumer.auto-offset-reset}")  // AUTO_OFFSET_RESET_CONFIG
+    @Value("${spring.kafka.consumer.auto-offset-reset:Default}")  // AUTO_OFFSET_RESET_CONFIG
     private static String consumerAutoOffsetReset;
 
 
