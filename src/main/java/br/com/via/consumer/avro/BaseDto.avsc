@@ -1,0 +1,8 @@
+{"namespace": "br.com.via.consumer.avro",
+ "type": "record",
+ "name": "BaseDto",
+ "fields": [
+     {"name": "identification", "type": "string"}
+     {"name": "status", "type": "string"}
+ ]
+}

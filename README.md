@@ -1,8 +1,18 @@
 # Platform Consumer Kafka em Java
 
+### Kafka Drop ###
+Kafdrop is a web UI for viewing Kafka topics and browsing consumer groups. The tool displays information such as brokers, topics, partitions, consumers, and lets you view messages.
+
+http://localhost:9000/
+
+### Docker Compose ###
+Compose is a tool for defining and running multi-container Docker applications.
+
 ### O que é o Apache Kafka? ###
 
 O Apache Kafka é uma plataforma open source que trabalha com streaming de eventos de forma distribuída. Esse sistema de mensageria vem sendo muito utilizado no mercado devido a sua escalabilidade e tolerância a falha.
+
+
 
 
 

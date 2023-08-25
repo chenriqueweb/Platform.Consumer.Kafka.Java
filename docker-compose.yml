@@ -3,6 +3,7 @@ version: '3.7'
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
     networks:
       - broker-kafka
     ports:
@@ -13,6 +14,8 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
+    hostname: kafka
+    container_name: kafka
     depends_on:
       - zookeeper
     networks:
@@ -34,9 +37,11 @@ services:
       KAFKA_MIN_INSYNC_REPLICAS: 1
       KAFKA_JMX_PORT: 9101
       KAFKA_JMX_HOSTNAME: localhost
+      KAFKA_SCHEMA_REGISTRY_URL: "schema-registry:8085"
 
   kafdrop:
     image: obsidiandynamics/kafdrop:latest
+    container_name: kafdrop
     networks:
       - broker-kafka
     depends_on:
@@ -44,7 +49,23 @@ services:
     ports:
       - "9000:9000"
     environment:
-      KAFKA_BROKERCONNECT: 'kafka:29092'
+      KAFKA_BROKERCONNECT: kafka:29092
+
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.0.0
+    container_name: schema-registry
+    restart: always
+    depends_on:
+      - zookeeper
+      - kafka
+    ports:
+      - "8081:8081"
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: 'schema-registry'
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: "zookeeper:2181"
+      #SCHEMA_REGISTRY_LISTENERS: "http://schema-registry:8081"
+      SCHEMA_REGISTRY_LISTENERS: "http://0.0.0.0:8081"
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://kafka:9092,PLAINTEXT_INTERNAL://localhost:29092
 
 networks:
   broker-kafka:
