@@ -1,0 +1,32 @@
+<?xml-stylesheet type="text/xsl" href=""?>
+<configuration>
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder"/>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+    </root>
+
+    <logger name="br.com.via.legacydata.api" level="DEBUG"
+            additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <logger
+            name="org.springframework.data.mongodb.core.MongoTemplate"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+    <logger
+            name="org.springframework.web.filter.CommonsRequestLoggingFilter"
+            level="DEBUG" additivity="false">
+        <appender-ref ref="Console"/>
+    </logger>
+
+</configuration>
+
+

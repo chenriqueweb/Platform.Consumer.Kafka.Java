@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.kafka.annotation.EnableKafka;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
+@EnableKafka
 @EnableConfigurationProperties
 @ConfigurationProperties("kafka")
 public class KafkaConfig {

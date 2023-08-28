@@ -7,17 +7,17 @@ import org.springframework.retry.annotation.Backoff;
 
 public interface IConsumer {
 
-    @KafkaListener( topics = "#{'${spring.kafka.topics}'.split(',')}",
-                   groupId = "#{'${spring.kafka.kafka.producer.grouped}'.split(',')}")
-    @RetryableTopic(
-            backoff = @Backoff(value = 3000L),
-            attempts = "5",
-            autoCreateTopics = "true",
-            include = RuntimeException.class)
-
-    public default void processaTipico(String topico) {
-        System.out.println(topico);
-    }
+//    @KafkaListener( topics = "#{'${spring.kafka.topics}'.split(',')}",
+//                   groupId = "#{'${spring.kafka.kafka.producer.grouped}'.split(',')}")
+//    @RetryableTopic(
+//            backoff = @Backoff(value = 3000L),
+//            attempts = "5",
+//            autoCreateTopics = "true",
+//            include = RuntimeException.class)
+//
+//    public default void processaTipico(String topico) {
+//        System.out.println(topico);
+//    }
 
 }
 
